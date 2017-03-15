@@ -1,0 +1,2 @@
+# Skin
+这个工程是一个支持App动态换肤的Library,包括本地资源替换的方式和插件式的方式。TestResourceProvider是测试Demo,ResourceProvider是资源包，用插件的放式换肤就是加载这个资源包的APK
