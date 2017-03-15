@@ -1,0 +1,2 @@
+# ResourceProvider
+这个工程是一个资源APK，APP动态换肤就加载这个APK的资源。

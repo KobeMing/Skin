@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="skin_side_nav_bar_bg">#b6b2ca</color>
+    <color name="skin_content_home_bg">#b373e4</color>
+
+    <color name="skin_label_text_color">#211921</color>
+    <color name="skin_summary_text_color">#e6c338</color>
+    <color name="skin_content_home_title_color">#00ff6a</color>
+</resources>

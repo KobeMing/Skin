@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">TestResourceProvider</string>
+    <string name="title_activity_home">HomeActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="action_skin_local">App内部换肤</string>
+    <string name="action_skin_plugin">插件换肤</string>
+</resources>
