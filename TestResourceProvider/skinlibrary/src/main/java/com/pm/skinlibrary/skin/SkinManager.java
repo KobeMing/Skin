@@ -34,6 +34,7 @@ public class SkinManager {
 
     private String mCurrPath;
     private String mCurrPak;
+    private String mSuffix;
 
 
     private SkinManager() {
@@ -53,6 +54,10 @@ public class SkinManager {
     }
 
     public ResourceManager getResourcesManager() {
+        if (!usePlugin()) {
+            //应用内部换肤
+            return new ResourceManager(mContext.getPackageName(), mContext.getResources(), mSuffix);
+        }
         return mResourcesManager;
     }
 
@@ -63,7 +68,7 @@ public class SkinManager {
 
         String pluginPath = mPrefUtils.getPluginPath();
         String pluginPkg = mPrefUtils.getPluginPkg();
-
+        mSuffix = mPrefUtils.getSuffix();
 
         try {
             File file = new File(pluginPath);
@@ -89,7 +94,7 @@ public class SkinManager {
             Resources superResources = mContext.getResources();
             Resources resources = new Resources(assetManager, superResources.getDisplayMetrics(),
                     superResources.getConfiguration());
-            mResourcesManager = new ResourceManager(skinPluginPkg, resources);
+            mResourcesManager = new ResourceManager(skinPluginPkg, resources, null);
 
             mCurrPath = skinPluginPath;
             mCurrPak = skinPluginPkg;
@@ -124,15 +129,28 @@ public class SkinManager {
 
     /**
      * 应用内的资源换肤
-     * @param Ssuffix
+     *
+     * @param suffix
      */
-    public void changeSkin(String Ssuffix){
+    public void changeSkin(String suffix) {
         // TODO: 2017/3/12  
-        
+        clearPluginInfo();
+        mSuffix = suffix;
+        mPrefUtils.saveSuffix(suffix);
+        notifyChangeListener();
+    }
+
+    private void clearPluginInfo() {
+        mCurrPath = null;
+        mCurrPak = null;
+        mSuffix = null;
+        mPrefUtils.clear();
+
     }
 
     /**
      * 插件式换肤
+     *
      * @param skinPluginPath
      * @param skinPluginPkg
      * @param callback
@@ -172,6 +190,7 @@ public class SkinManager {
                     notifyChangeListener();
                     changeCallback.onComplete();
 
+                    //update path and pkg
                     mPrefUtils.savePluginPath(skinPluginPath);
                     mPrefUtils.savePluginPkg(skinPluginPkg);
                 } catch (Exception e) {
@@ -183,8 +202,7 @@ public class SkinManager {
     }
 
     private void updatePluginInfo() {
-        // TODO: 2017/3/12  
-
+        // TODO: 2017/3/12
     }
 
     /**
@@ -210,10 +228,14 @@ public class SkinManager {
     }
 
     public boolean needChangSkin() {
-        return usePlugin();
+        return usePlugin() || useSuffix();
     }
 
     private boolean usePlugin() {
         return mCurrPath != null && !mCurrPath.trim().equals("");
+    }
+
+    private boolean useSuffix() {
+        return mSuffix != null && !mSuffix.trim().equals("");
     }
 }

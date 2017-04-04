@@ -27,6 +27,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.pm.skinlibrary.base.BaseSkinActivity;
 import com.pm.skinlibrary.callback.ISkinChangeCallback;
@@ -177,12 +178,14 @@ public class HomeActivity extends BaseSkinActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_skin_local) {
-            // TODO: 2017/3/11  
+            // TODO: 2017/3/11
+            SkinManager.getInstance().changeSkin("suffix");
             return true;
         }
         if (id == R.id.action_skin_plugin) {
             // TODO: 2017/3/11
             if (mHasPermission) {
+                Toast.makeText(this, "mSkinPluginPath="+mSkinPluginPath, Toast.LENGTH_SHORT).show();
                 SkinManager.getInstance().changeSkin(mSkinPluginPath,mSkinPluginPkg, new ISkinChangeCallback() {
                     @Override
                     public void onStart() {

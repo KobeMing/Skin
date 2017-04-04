@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
             Resources superResources =getResources();
             Resources resources = new Resources(assetManager, superResources.getDisplayMetrics(),
                     superResources.getConfiguration());
-            ResourceManager mResourcesManager = new ResourceManager(skinPluginPkg, resources);
+            ResourceManager mResourcesManager = new ResourceManager(skinPluginPkg, resources,null);
             //读取插件包中的对应Drawable文件名，注意没有扩展名。
             String drawableName = "skin_icon";
             Drawable drawableByRes = null;
